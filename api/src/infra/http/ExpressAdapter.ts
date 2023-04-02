@@ -36,7 +36,6 @@ export default class ExpressAdapter implements Http {
 			const output = await callback(req.params, req.body);
 			res.json(output);
 		});
-		this.listen(3000)
 	}
 
 	listen(port: number): void {
