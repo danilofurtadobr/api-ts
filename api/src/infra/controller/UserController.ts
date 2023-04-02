@@ -1,18 +1,18 @@
+import { injectable, inject } from 'inversify';
+import UserService from "../../service/UserService";
 import Http from "../http/Http";
 import AbstractController from "./AbstractController";
 
+@injectable()
 export default class UserController extends AbstractController {
 
-	constructor(http: Http) {
+	constructor(
+		@inject('Http') http: Http,
+		@inject('UserService') userService: UserService,
+	) {
 		super(http);
-        this.routes();
-	}
-
-    async routes() {
-		this.http.route("post", "/create", async function (params: any, body: any) {
-			return {
-				access_token: "123456"
-			};
+		this.http.route("post", "/user", async function (params: any, body: any) {
+			return userService.create();
 		});
-    }
+	}
 }

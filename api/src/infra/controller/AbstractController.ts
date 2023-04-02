@@ -9,6 +9,4 @@ export default abstract class AbstractController {
 	constructor(@inject('Http') http: Http) {
 		this.http = http;
 	}
-
-    abstract routes(): Promise<any>;
 }
