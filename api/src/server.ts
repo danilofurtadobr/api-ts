@@ -1,16 +1,23 @@
 import PgPromiseConnection from "./infra/database/PgPromiseConnection";
-import express from 'express';
+import ExpressAdapter from "./infra/http/ExpressAdapter";
 import dotenv from 'dotenv';
 
 dotenv.config();
-const app = express();
 
 const connection = new PgPromiseConnection();
 
-app.get('/', (req, res) => {
-  res.send('Bem-vindo à minha API!');
+const http = new ExpressAdapter();
+
+http.route("post", "/login", async function (params: any, body: any) {
+  return {
+    access_token: "123456"
+  };
 });
 
-app.listen(3000, () => {
-  console.log('Servidor iniciado na porta 3000!');
+http.route("get", "/", async function (params: any, body: any) {
+  return {
+    message: "Vou almoçar!"
+  };
 });
+
+http.listen(3000);
