@@ -1,0 +1,25 @@
+version: "3.8" 
+services: 
+  postgres: 
+    build: 
+      context: . 
+      dockerfile: Dockerfile 
+    image: postgres 
+    container_name: postgres 
+    restart: always 
+    environment: 
+      POSTGRES_USER: ${PGUSER:?err}
+      POSTGRES_PASSWORD: ${PGPASSWORD:?err}
+    ports: 
+      - 5432:5432 
+    volumes: 
+      - postgres:/var/lib/postgresql/data 
+    networks:
+      - postgres 
+volumes: 
+  postgres:
+    name: postgres 
+networks: 
+  postgres: 
+    name: postgres 
+    driver: bridge
