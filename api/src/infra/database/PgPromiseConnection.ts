@@ -1,6 +1,8 @@
+import { injectable } from 'inversify';
 import Connection from "./Connection";
 import pgp from "pg-promise";
 
+@injectable()
 export default class PgPromiseConnection implements Connection {
 	connection: any;
 	constructor () {

@@ -14,7 +14,18 @@ container.bind<AuthController>(AuthController).toSelf();
 container.bind<UserController>(UserController).toSelf();
 
 
-// Repository
+// Database
+import Connection from '../database/Connection';
+import PgPromiseConnection from '../database/PgPromiseConnection';
+
+container.bind<Connection>('Connection').to(PgPromiseConnection);
+
+
+// Repository 
+import UserRepository from '../../domain/repository/UserRepository';
+import UserRepositoryDatabase from '../repository/UserRepositoryDatabase';
+
+container.bind<UserRepository>('UserRepository').to(UserRepositoryDatabase);
 
 
 // Aplication Service
